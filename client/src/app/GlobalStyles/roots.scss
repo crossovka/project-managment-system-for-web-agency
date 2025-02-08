@@ -1,0 +1,75 @@
+:root {
+	--main-color: #f5f5f5;
+	--secondary-color: #fff;
+	--further-color: #402495;
+	--further-color-bright: rgba(64, 36, 149, 0.7);
+	--accent-color: #FC5A45;
+
+	--main-font-color: #000000;
+	--secondary-font-color: #FFF;
+	--further-font-color: #402495;
+	--description-font-color: #cfcfcf;
+
+	--btn-color: #FC5A45;
+	// --btn-hover-color: darken(#FFF, 10%);
+	--btn-hover-color: #ff1e00;
+	// --btn-hover-color: #bc3c17;
+
+	--ff: "MontserratAlternates", sans-serif, Arial, -apple-system, "BlinkMacSystemFont", sans-serif, Helvetica, sans-serif;
+
+	--hairline: 100;
+	--thin: 200;
+	--light: 300;
+	--regular: 400;
+	--medium: 500;
+	--semi-bold: 600;
+	--bold: 700;
+	--extra-bold: 800;
+	--black: 900;
+
+	--ui-index--1: -1;
+	--ui-index-1: 1;
+	--ui-index-2: 2;
+	--ui-index-3: 3;
+	--ui-index-4: 4;
+	--ui-index-5: 5;
+	--ui-index-6: 6;
+	--ui-index-7: 7;
+	--ui-index-8: 8;
+	--ui-index-9: 9;
+
+	--sidebar-width: 100px;
+	--sidebar-width-hover: 240px;
+
+	--main-section-paddings: 70px;
+
+	@media (max-width: em(700)) {
+		--main-section-paddings: 20px;
+	}
+
+	// @media (max-width:$tablet){
+	// 	--main-section-paddings: 50px;
+	// }
+	// @media (max-width:$mobile){
+	// 	--main-section-paddings: 40px;
+	// }
+	// @media (max-width:$mobileSmall){
+	// 	--main-section-paddings: 30px;
+	// }
+	// чтобы слепить 2 секции
+	// margin-top: calc(var(--main-section-paddings) * -2)
+}
+
+// TODO поменять
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
+	}
+}

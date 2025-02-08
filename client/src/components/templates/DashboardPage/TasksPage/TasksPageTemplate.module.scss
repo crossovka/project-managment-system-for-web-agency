@@ -1,0 +1,23 @@
+.taskPage {
+	// height: calc(100% + 50px);
+	height: 100vh;
+	// width: calc(100% + 45px);
+
+	// margin: -25px -15px -25px -30px;
+	// padding: 25px 15px 25px 30px;
+
+	display: flex;
+	flex-direction: column;
+
+	// background-image: url(/img/tasks-bg.webp);
+	// background-repeat: no-repeat;
+	// background-size: cover;
+}
+
+.header {
+	margin-bottom: 40px;
+	h1{
+		font-size: 40px;
+		font-weight: var(--bold);
+	}
+}

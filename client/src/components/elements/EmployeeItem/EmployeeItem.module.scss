@@ -1,0 +1,19 @@
+.employee {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	/* Применяем переменную цвета для текста или других стилей */
+	color: var(--department-color, black);
+	/* fallback на черный цвет, если переменная не передана */
+
+	span {
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	img {
+		border-radius: 50%;
+		/* Можно использовать цвет для фона и других стилизаций */
+	}
+}

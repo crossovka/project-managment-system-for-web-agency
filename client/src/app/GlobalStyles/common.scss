@@ -1,0 +1,332 @@
+@import "./common/content-field.scss";
+@import "./common/buttons.scss";
+
+// для скрытых заголовков. испольщовать крайне редко ибо поисковые роботы за текст который не видно снижают баллы!
+.visually-hidden {
+	position: absolute;
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+// .transition-opacity {
+// 	transition-property: opacity;
+// 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+// 	transition-duration: 150ms;
+// }
+
+// .opacity-0 {
+// 	opacity: 0;
+// }
+
+// .duration {
+// 	transition-duration: 2s;
+// }
+
+// TODO все дёрганое какое-то нужно lazyload плакгин какой-нибудь подрубить
+// (на вп я блейзи юзал? мб под реакт свой есть со скроллом работающий)
+.img-loading {
+	background: url('/img/noimg.svg') no-repeat 50% 50%;
+	background-size: cover;
+
+	height: 100%;
+	width: 100%;
+
+	// цвет с svg-шки
+	background-color: #C0C0C0;
+
+	pointer-events: none;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: var(--btn-color);
+
+	border-radius: 18px;
+	padding: 14px 26px;
+
+	font-size: rem(20);
+	color: var(--secondary-font-color);
+
+	transition: 0.3s linear all;
+
+	@media (any-hover: hover) {
+		&:hover {
+			background: var(--btn-hover-color);
+		}
+	}
+
+	&:disabled {}
+
+	// btn--sm
+	&--sm{
+		padding: 8px 12px;
+		font-size: rem(16);
+	}
+}
+
+.add-new-btn {
+	position: relative;
+
+	padding: 14px;
+	border-radius: 50%;
+
+	background: var(--btn-color);
+	transition: all 0.25s ease;
+
+	@media (any-hover: hover) {
+		&:hover {
+			background: var(--btn-hover-color);
+			transform: rotate(90deg);
+
+			span {
+				transform-origin: center;
+			}
+		}
+	}
+
+	span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		font-size: 24px;
+		color: var(--secondary-font-color);
+
+		user-select: none;
+	}
+}
+
+.link {
+	position: relative;
+	display: block;
+	width: fit-content;
+
+	transition: color 0.3s ease;
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: var(--accent-color);
+		}
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		// bottom: -0.4em;
+		// bottom: -0.04em;
+		bottom: 0;
+		left: 0;
+		height: 0.06em;
+		background: var(--btn-color);
+	}
+}
+
+// Font-size
+.h1 {
+	line-height: 1.1em;
+	font-weight: var(--bold);
+	margin-bottom: 0.6em;
+
+	font-size: 36px;
+}
+
+.h2 {
+	line-height: 1.1;
+	font-weight: var(--bold);
+	margin-bottom: 0.6em;
+	font-size: 26px;
+}
+
+.h3 {
+	line-height: 1.1em;
+	font-weight: var(--bold);
+	margin-bottom: 0.6em;
+	font-size: 24px;
+}
+
+.h4 {
+	font-weight: var(--bold);
+	line-height: 1.1em;
+	margin-bottom: 0.6em;
+	font-size: 20px;
+}
+
+.h5 {
+	line-height: 1.2em;
+	font-weight: var(--medium);
+	font-size: 18px;
+}
+
+.h6 {
+	line-height: 1.2em;
+	font-weight: var(--medium);
+
+	font-size: 16px;
+}
+
+.content-field {
+	h1 {
+		@extend .h1;
+	}
+
+	h2 {
+		@extend .h2;
+	}
+
+	h3 {
+		@extend .h3;
+	}
+
+	h4 {
+		@extend .h4;
+	}
+
+	h5 {
+		@extend .h5;
+	}
+
+	h6 {
+		@extend .h6;
+	}
+
+	a {
+		@extend .link;
+		// color: currentColor;
+		// text-decoration: underline;
+		// text-underline-offset: 0.3em;
+		// text-decoration-thickness: 1px;
+	}
+
+	ul {
+		li {
+			// list-style-type: disc !important;
+			display: flex;
+			gap: 10px;
+
+			// &:not(:last-child) {}
+			margin-bottom: 1em;
+
+			font-weight: inherit;
+
+			&::before {
+				content: '';
+				flex: 0 0 auto;
+				display: inline-block;
+				transform: translateY(0.45em);
+				width: 0.4em;
+				height: 0.4em;
+				border-radius: 50%;
+				// background: var(--accent-font-color);
+				background: currentColor;
+			}
+		}
+	}
+
+	ol {
+		padding-left: 1.5em;
+
+		li {
+			list-style-type: auto;
+			margin-bottom: 1em;
+		}
+	}
+
+	&--ol {
+		ul {
+			li {
+				&:before {
+					color: var(--primary);
+				}
+			}
+		}
+	}
+
+	&--lg {
+
+		p,
+		li {
+			line-height: 1.4;
+			font-size: 20px;
+			// <br> просто?
+			// &:not(:last-child) {
+			// 	margin-bottom: em(32,20);
+			// }
+
+			// @include media-breakpoint-down(lg) {
+			// 	// font-size: 20px;
+			// }
+
+			// @include media-breakpoint-down(md) {
+			// 	font-size: 18px;
+			// }
+
+			// @include media-breakpoint-down(sm) {
+			// 	font-size: 16px;
+			// }
+
+			// @include media-breakpoint-down(xs) {
+			// 	font-size: 14px;
+			// }
+		}
+	}
+
+	&--md {
+
+		p,
+		li {
+			line-height: 1.4;
+			font-weight: var(--regular);
+			font-size: 18px;
+
+			// <br> просто?
+			// &:not(:last-child) {
+			// 	margin-bottom: em(сам отступ,18);
+			// }
+
+			// @include media-breakpoint-down(lg) {
+			// 	font-size: 16px;
+			// }
+
+			// @include media-breakpoint-down(xs) {
+			// 	font-size: 14px;
+			// }
+		}
+	}
+
+	&--sm {
+		ul {
+			li {
+				&:before {
+					line-height: 0.6em;
+				}
+			}
+		}
+
+		p,
+		li {
+			font-size: 14px;
+
+			// @include media-breakpoint-down(sm) {
+			// 	font-size: 12px;
+			// }
+		}
+	}
+
+	&--mb0 {
+		>*:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

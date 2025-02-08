@@ -1,0 +1,175 @@
+// Скопировать с оследнего проекта на В
+// .content-field {
+
+// 	h1,
+// 	.h1 {
+// 		font-size: 68px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 50px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 32px;
+// 		}
+
+// 		@media (max-width: #{$mobileSmall}) {
+// 			font-size: 28px;
+// 		}
+
+// 		font-family: var(--ff-sec);
+// 		line-height: 1.1em;
+// 		font-weight: normal;
+// 		margin-bottom: 0.6em;
+// 	}
+
+// 	h2,
+// 	.h2 {
+// 		font-size: 42px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 38px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 32px;
+// 		}
+
+// 		@media (max-width: #{$mobileSmall}) {
+// 			font-size: 25px;
+// 		}
+
+// 		font-family: var(--ff-sec);
+// 		line-height: 1.1em;
+// 		font-weight: normal;
+// 		margin-bottom: 0.6em;
+// 	}
+
+// 	h3,
+// 	.h3 {
+// 		font-size: 30px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 26px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 22px;
+// 		}
+
+// 		@media (max-width: #{$mobileSmall}) {
+// 			font-size: 20px;
+// 		}
+
+// 		font-family: var(--ff-sec);
+// 		line-height: 1.1em;
+// 		font-weight: normal;
+// 		margin-bottom: 0.6em;
+// 	}
+
+// 	h4,
+// 	.h4 {
+// 		font-size: 20px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 18px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 16px;
+// 		}
+
+// 		@media (max-width: #{$mobileSmall}) {
+// 			font-size: 14px;
+// 		}
+
+// 		font-family: var(--ff-sec);
+// 		font-weight: bold;
+// 		line-height: 1.1em;
+// 		margin-bottom: 0.6em;
+// 	}
+
+// 	h5,
+// 	.h5 {
+// 		font-size: 18px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 16px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 14px;
+// 		}
+
+// 		line-height: 1.2em;
+// 		font-weight: 500;
+// 	}
+
+// 	h6,
+// 	.h6 {
+// 		font-size: 16px;
+
+// 		@media (max-width: #{$tablet}) {
+// 			font-size: 14px;
+// 		}
+
+// 		@media (max-width: #{$mobile}) {
+// 			font-size: 13px;
+// 		}
+
+// 		line-height: 1.2em;
+// 		font-weight: 500;
+// 	}
+
+// 	a {
+// 		color: currentColor;
+// 		text-decoration: underline;
+// 		text-underline-offset: 0.3em;
+// 		text-decoration-thickness: 1px;
+// 		transition: color 0.3s ease 0s;
+
+// 		@media (any-hover: hover) {
+// 			&:hover {
+// 				color: var(--hover-color);
+// 			}
+// 		}
+// 	}
+
+// 	h4 {
+// 		margin-bottom: 1em;
+
+// 		&:last-child {
+// 			margin-bottom: 0;
+// 		}
+// 	}
+
+// 	&-mb0 {
+// 		>*:last-child {
+// 			margin-bottom: 0;
+// 		}
+// 	}
+
+// 	&-ul {
+// 		ul {
+// 			li {
+// 				display: flex;
+// 				gap: 12px;
+
+// 				&:not(:last-child) {
+// 					margin-bottom: rem(10);
+// 				}
+
+// 				&::before {
+// 					content: '';
+// 					flex: 0 0 auto;
+// 					display: inline-block;
+// 					transform: translateY(50%);
+// 					width: 12px;
+// 					height: 12px;
+// 					border-radius: 50%;
+// 					background: var(--accent-color);
+// 				}
+// 			}
+// 		}
+// 	}
+// }

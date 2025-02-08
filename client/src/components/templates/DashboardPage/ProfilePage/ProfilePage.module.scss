@@ -1,0 +1,121 @@
+@import "../../../../app/GlobalStyles/base/mixins.scss";
+
+.root {}
+
+.profile {
+	&__earnings {
+		// display: flex;
+		// justify-content: space-between;
+		align-items: center;
+		// flex-flow: row wrap;
+
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+		gap: 25px 40px;
+
+		margin-bottom: 60px;
+
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			flex: 0 0 256px;
+
+			padding: 25px 15px;
+			border-radius: 15px;
+			border: 1px solid var(--further-color);
+			box-shadow: 2px 2px 8px var(--further-color);
+		}
+
+		.earnings__inner {
+			display: flex;
+			flex-direction: column;
+			gap: rem(10);
+
+			span {
+				font-size: rem(24);
+				font-weight: var(--semi-bold);
+			}
+			
+			p {
+				font-size: rem(16);
+			}
+		}
+
+		svg {
+			flex: 0 0 40px;
+			height: 40px;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		margin-bottom: 46px;
+
+		span{
+			font-size: 36px !important;
+			font-weight: var(--semi-bold)
+		}
+		img{
+			display: none;
+			visibility: hidden;
+		}
+	}
+
+	&__projects {
+		
+		&:not(:last-child) {
+			margin-bottom: 40px;
+		}
+		
+		h3 {
+			margin-bottom: 30px;
+			font-size: rem(36);
+		}
+
+		button{
+			font-size: rem(20);
+		}
+
+		ul {
+			margin-top: 30px;
+			display: flex;
+			align-items: center;
+			gap: 30px;
+
+			li {
+				a {
+					display: block;
+
+					padding: rem(20) rem(25);
+					font-size: rem(28);
+					font-weight: var(--semi-bold);
+					color: var(--secondary-font-color);
+
+					background: var(--further-color-bright);
+
+					border-radius: 25px;
+					// border: 1.5px solid var(--accent-color);
+					box-shadow: 2px 4px 8px var(--further-color-bright);
+
+					transition: all 0.3s ease;
+
+					@media (any-hover: hover) {
+						&:hover {
+							background: var(--further-color);
+							// color: var(--secondary-font-color)
+							box-shadow: 6px 8px 8px var(--accent-color);
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+.earnings {}

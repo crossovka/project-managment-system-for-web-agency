@@ -1,0 +1,24 @@
+/* Accordion */
+.accordion {
+	&__title {
+		display: flex;
+		align-items: center;
+		// justify-content: space-between;
+		gap: 40px;
+		cursor: pointer;
+		width: 100%;
+		text-align: left;
+	}
+
+	&__icon {
+		transition: transform 0.3s ease;
+
+		&--rotate {
+			transform: rotate(-180deg);
+		}
+	}
+
+	&__content {
+		padding: 10px 0;
+	}
+}

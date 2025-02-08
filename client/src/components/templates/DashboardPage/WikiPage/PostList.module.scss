@@ -1,0 +1,59 @@
+@import "../../../../app/GlobalStyles/base/mixins.scss";
+
+.postList {
+	margin-top: 20px;
+
+	// display: flex;
+	// flex-direction: column;
+	display: grid;
+	// grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-columns: repeat(2, 1fr);
+	gap: rem(30) rem(34);
+}
+
+.postItem {
+	background-color: var(--secondary-color);
+	padding: 15px;
+	border-radius: 18px;
+	box-shadow: 0 10px 16px rgba(0, 0, 0, 0.3);
+
+	a{}
+
+	h3 {
+		font-size: rem(30);
+		margin-bottom: em(14, 30);
+		font-weight: var(--semi-bold);
+	}
+
+	&__description {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+
+		margin-bottom: em(10, 16);
+
+		color: var(--description-font-color);
+		
+		span {
+			font-size: rem(25);
+		}
+	}
+
+	&__category {}
+
+	&__cratedBy {}
+
+	&__times {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		margin-bottom: em(10, 16);
+
+		color: var(--description-font-color);
+	}
+
+	&__content {
+		font-size: rem(18);
+	}
+}

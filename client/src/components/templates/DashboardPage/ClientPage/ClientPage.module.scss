@@ -1,0 +1,90 @@
+.clientPage {
+	.header {
+		margin-bottom: 40px;
+
+		h1 {
+			font-size: 40px;
+			font-weight: var(--bold);
+		}
+	}
+
+	.content {
+		.section {
+			&:not(:last-child) {
+				margin-bottom: 40px;
+			}
+
+			border-top: 1px solid black;
+			padding-top: 10px;
+
+			.info {
+				p {
+					margin-bottom: 5px;
+
+					strong {
+						font-weight: var(--bold);
+					}
+				}
+			}
+		}
+	}
+}
+
+.sectionHeader{
+	display: flex;
+	align-items: center;
+	gap: 14px;
+
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
+
+	h2 {
+		font-size: 26px;
+		font-weight: bold;
+	}
+}
+
+.contactDetails {
+	&__item {
+		font-size: 18px;
+		p{
+			&:not(:last-child) {
+				margin-bottom: 6px;
+			}
+		}
+		&:not(:last-child) {
+			margin-bottom: 18px;
+		}
+	}
+}
+
+.projects {
+	display: flex;
+	gap: 20px;
+
+	&__item {
+		display: block;
+
+		padding: 15px 36px;
+		border-radius: 25px;
+		background: var(--further-color-bright);
+		box-shadow: 2px 4px 8px var(--further-color-bright);
+
+		color: var(--secondary-font-color);
+
+		transition: all 0.3s ease;
+		@media (any-hover: hover) {
+			&:hover {
+					background: var(--further-color);
+					box-shadow: 6px 8px 8px var(--accent-color);
+			}
+		}
+
+		h3 {
+			margin-bottom: 10px;
+			font-size: 20px;
+			font-weight: var(--bold);
+		}
+	}
+}

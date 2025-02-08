@@ -1,0 +1,32 @@
+.btn {
+	position: relative;
+
+	padding: 14px;
+	border-radius: 50%;
+
+	background: var(--btn-color);
+	transition: all 0.25s ease;
+
+	@media (any-hover: hover) {
+		&:hover {
+			background: var(--btn-hover-color);
+			transform: rotate(45deg);
+
+			span {
+				transform-origin: center;
+			}
+		}
+	}
+	
+	span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		font-size: 24px;
+		color: var(--secondary-font-color);
+
+		user-select: none;
+	}
+}

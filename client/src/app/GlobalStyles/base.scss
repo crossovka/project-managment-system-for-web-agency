@@ -1,0 +1,124 @@
+// Стили для полноэкранного блока
+// @import "base/fullscreen";
+
+// Стили для отзывчивых картинок (IBG)
+// Сниппет (HTML): ibg (div c картинкой и классами)
+// Сниппет (HTML): ibga (a c картинкой и классами)
+[class*="-ibg"] {
+	position: relative;
+	img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+		// object-position: center;
+	}
+}
+[class*="-ibg_contain"] {
+	img {
+		object-fit: contain;
+	}
+}
+
+// Шаблоны (заготовки)
+// @extend %имя шаблона;
+// Сниппет (SCSS): ex
+
+// нон селект и подстветка после клика
+%nonselect {
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-drag: none;
+}
+
+%nonselect {
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	// outline: none;
+	-webkit-user-drag: none;
+	pointer-events: none;
+}
+// Счетчик для списка
+%listCounter {
+	list-style-type: none;
+	counter-reset: item;
+	li {
+		position: relative;
+		&:before {
+			counter-increment: item;
+			content: counter(item);
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+}
+// Адаптивное видео
+%responsiveVideo {
+	position: relative;
+	overflow: hidden;
+	height: 0;
+	padding-bottom: 56.25%;
+	video,
+	iframe,
+	object,
+	embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+// Видео в качестве фона
+%videoBackground {
+	video,
+	iframe,
+	object,
+	embed {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: -100;
+		transform: translateX(-50%) translateY(-50%);
+		background-size: cover;
+	}
+}
+// Серый фильтр
+%grayfilter {
+	transition: all 0.3s ease 0s;
+	filter: grayscale(1);
+	@media (any-hover: hover) {
+		&:hover {
+			filter: grayscale(0);
+		}
+	}
+}
+// Отменить выделение
+%noselect {
+	user-select: none;
+}
+// Зеркальное отображение
+%mirror {
+	transform: scale(-1, 1);
+}
+// Плавный скролл
+%smoothscroll {
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
+	}
+	-webkit-overflow-scrolling: touch;
+}
+// Скрыть скролл
+%hidescroll {
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

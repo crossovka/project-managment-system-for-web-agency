@@ -1,0 +1,65 @@
+.dropdown {
+	position: relative;
+	width: 100%;
+}
+
+.selectedProject {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	padding: 8px;
+	border: 1px solid #ccc;
+}
+
+.selectedProjectDetails {
+	display: flex;
+	flex-direction: column;
+	padding-right: 30px;
+}
+
+.clearSelection {
+	position: absolute;
+	right: 14px;
+	background: none;
+	border: none;
+	font-size: 30px;
+	color: #999;
+	cursor: pointer;
+}
+
+.dropdownList {
+	position: absolute;
+	width: 100%;
+	max-height: 300px;
+	overflow-y: auto;
+	background-color: white;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	margin-bottom: 8px;
+}
+
+.projectItem {
+	padding: 8px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f5f5f5;
+	}
+}
+
+.loading,
+.error,
+.noResults {
+	padding: 8px;
+	text-align: center;
+}
+
+.noResults {
+	color: #999;
+}

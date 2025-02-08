@@ -1,0 +1,33 @@
+.board {
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	gap: 30px;
+
+	overflow: auto;
+}
+
+.column {
+	min-width: 333px;
+
+	h2 {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+
+		font-size: 26px;
+
+		&:not(:last-child) {
+			margin-bottom: 1.5rem;
+		}
+		font-weight: var(--semi-bold);
+	}
+}
+
+.column__inner {
+	display: flex;
+	flex-direction: column;
+	row-gap: 30px;
+}

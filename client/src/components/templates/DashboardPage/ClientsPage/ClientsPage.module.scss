@@ -1,0 +1,26 @@
+.header {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+
+	h1 {
+		font-size: 40px;
+		font-weight: var(--bold);
+	}
+
+	margin-bottom: 30px;
+}
+
+.clientsList {
+	li {
+		width: fit-content;
+
+		&:not(:last-child) {
+			margin-bottom: 3em;
+		}
+
+		a {
+			font-size: 36px;
+		}
+	}
+}

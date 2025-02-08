@@ -1,0 +1,19 @@
+.dashboard {
+	display: flex;
+}
+
+main.with-sidebar {
+	height: 100%;
+	min-height: 100vh;
+	overflow-y: auto;
+	width: calc(100% - var(--sidebar-width));
+	margin-left: var(--sidebar-width);
+	// padding: 25px 15px 25px 30px;
+
+	// margin: -25px -15px -25px -30px;
+	padding: 25px 15px 25px 30px;
+	background-image: url(/img/tasks-bg.webp);
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}

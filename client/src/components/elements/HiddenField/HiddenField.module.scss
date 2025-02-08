@@ -1,0 +1,14 @@
+.hiddenField {
+	margin: 0.5rem 0;
+}
+
+.copyable {
+	cursor: pointer;
+	color: var(--link-color);
+	text-decoration: underline;
+
+	&:hover {
+		text-decoration: none;
+		color: var(--link-hover-color);
+	}
+}

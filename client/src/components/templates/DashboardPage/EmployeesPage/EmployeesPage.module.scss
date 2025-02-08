@@ -1,0 +1,51 @@
+.header {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	
+	h1 {
+		font-size: 40px;
+		font-weight: var(--bold);
+	}
+
+	margin-bottom: 30px;
+}
+
+.departaments {
+	.employeeSection {
+		padding-bottom: 10px;
+	
+		&:not(:first-child) {
+			border-top: 2px solid #000000;
+		}
+		
+		&:not(:last-child) {
+			border-bottom: 2px solid #000000;
+			padding-bottom: 28px;
+			margin-bottom: -2px;
+		}
+
+		h2 {
+			font-size: 26px;
+			font-weight: var(--semi-bold);
+
+			margin-top: 1.1rem;
+
+			&:not(:last-child) {
+				margin-bottom: 1.1rem;
+			}
+		}
+
+
+		ul {
+			li {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+
+				// font-size: 20px !important;
+			}
+		}
+
+	}
+}

@@ -1,0 +1,15 @@
+# Указываем, что файл .	 должен применяться к текущему проекту
+root = true
+
+# Общие настройки для всех файлов
+[*]
+indent_style = tab        # Использовать tab для отступов
+indent_size = 4             # Размер отступа 4 пробела
+end_of_line = lf            # Стиль конца строки LF (Linux/Unix)
+charset = utf-8             # Кодировка UTF-8
+trim_trailing_whitespace = true # Удалять лишние пробелы в конце строки
+insert_final_newline = false     # Добавлять новую строку в конце файла
+
+# Специфические настройки для файлов .md (Markdown)
+[*.md]
+trim_trailing_whitespace = false # Не удалять пробелы в конце строки в Markdown файлах

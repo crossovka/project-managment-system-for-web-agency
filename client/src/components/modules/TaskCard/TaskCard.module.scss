@@ -1,0 +1,99 @@
+%dflex {
+	display: flex;
+	align-items: center;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+
+	position: relative;
+
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #676767;
+	border-radius: 20px;
+}
+
+.dates {
+	@extend %dflex;
+	gap: 3px;
+
+	margin-bottom: 14px;
+
+	font-size: 13px;
+
+	span,
+	time:nth-of-type(2) {
+		color: red;
+	}
+}
+
+.main {
+	@extend %dflex;
+	flex-flow: row wrap;
+	gap: 4px;
+
+	margin-bottom: 14px;
+	font-size: 14px;
+
+	h3 {
+		font-weight: var(--semi-bold);
+	}
+
+	a {
+		font-weight: var(--light);
+		text-decoration: underline !important;
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: var(--accent-color);
+			}
+		}
+	}
+}
+
+.footer {
+	&:not(:last-child) {
+		margin-bottom: 8px;
+	}
+	
+	@extend %dflex;
+	flex-flow: row wrap;
+	gap: 8px;
+
+	span {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px;
+		background: #676767;
+		border-radius: 20px;
+
+		font-size: 13px;
+		color: #fff;
+	}
+
+	span:nth-of-type(2) {
+		background: #968080;
+	}
+}
+
+.viewButton{
+	position: absolute;
+	right: 5%;
+	top: 5%;
+
+	svg {
+		transition: fill 0.2s ease, color 0.2s ease, stroke 0.2s ease;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			svg {
+				fill: var(--accent-color);
+				// stroke: var(--accent-color);
+			}
+		}
+	}
+}

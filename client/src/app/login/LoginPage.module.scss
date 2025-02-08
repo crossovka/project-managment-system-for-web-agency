@@ -1,0 +1,49 @@
+@import "../GlobalStyles/base/mixins.scss";
+
+.page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	background: var(--secondary-color);
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 100%;
+
+	padding: 0 80px;
+	background: var(--main-color);
+}
+
+.form {
+	width: 300px;
+
+	h2 {
+		font-size: rem(26);
+
+		&:not(:last-child) {
+			// margin-bottom: em(26, 26);
+			margin-bottom: rem(36);
+		}
+	}
+
+	.fields{
+		display: flex;
+		flex-direction: column;
+		gap: rem(14);
+	}
+
+	button{
+		margin-top: rem(24);
+	}
+}
+.error{
+	color: red;
+}

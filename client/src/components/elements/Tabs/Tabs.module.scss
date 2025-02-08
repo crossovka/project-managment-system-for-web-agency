@@ -1,0 +1,28 @@
+.tabs {
+	display: flex;
+	gap: 10px;
+
+	&__button {
+		padding: 10px 20px;
+		background-color: var(--main-color);
+
+		font-size: 18px;
+		font-weight: 500;
+
+		border: 1px solid var(--btn-color);
+		border-radius: 8px;
+
+		cursor: pointer;
+		transition: all 0.3s, color 0.3s;
+
+		&:hover {
+			background-color: var(--btn-hover-color);
+			color: var(--secondary-font-color);
+		}
+
+		&--active {
+			background-color: var(--btn-color);
+			color: var(--secondary-font-color);
+		}
+	}
+}

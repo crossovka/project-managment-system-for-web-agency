@@ -1,0 +1,72 @@
+.dropdown {
+	position: relative;
+	width: 100%;
+	font-family: Arial, sans-serif;
+}
+
+.selectedEmployee {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.selectedEmployeeDetails {
+	display: flex;
+	align-items: center;
+	padding-right: 30px;
+}
+
+.clearSelection {
+	position: absolute;
+	right: 14px;
+	background: none;
+	border: none;
+	font-size: 30px;
+	color: #999;
+	cursor: pointer;
+}
+
+.clearSelection:hover {
+	color: red;
+}
+
+.dropdownList {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	max-height: 200px;
+	overflow-y: auto;
+	border: 1px solid #ccc;
+	background-color: white;
+	z-index: 10;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	border-radius: 4px 4px 0 0;
+}
+
+.employeeItem {
+	padding: 8px;
+	cursor: pointer;
+}
+
+.employeeItem:hover {
+	background-color: #f0f0f0;
+}
+
+.noResults {
+	padding: 8px;
+	color: #999;
+}
