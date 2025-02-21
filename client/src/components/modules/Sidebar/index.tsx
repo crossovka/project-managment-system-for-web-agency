@@ -6,7 +6,10 @@ import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectCurrentUser } from '@/redux/slices/auth/selectors';
 import { logout } from '@/redux/slices/auth/slice';
-import { isDirector, isManagerOrDirector } from '@/libs/utils/isManagerOrDirector';
+import {
+	isDirector,
+	isManagerOrDirector,
+} from '@/libs/utils/isManagerOrDirector';
 
 import SidebarLink from './SidebarLink';
 
@@ -47,19 +50,19 @@ export const Sidebar = () => {
 		},
 		// Only show employees link for managers/directors
 		...(isDirector(currentUser)
-		? [{ icon: <ProjectsIcon />, href: '/projects', title: 'Проекты	' }]
-		: []),
+			? [{ icon: <ProjectsIcon />, href: '/projects', title: 'Проекты	' }]
+			: []),
 		...(isManagerOrDirector(currentUser)
 			? [{ icon: <EmployeesIcon />, href: '/employees', title: 'Сотрудники' }]
 			: []),
-			...(isManagerOrDirector(currentUser)
-				? [{ icon: <ClientsIcon />, href: '/clients', title: 'Клиенты' }]
-				: []),
-				{
-					icon: <WikiIcon />,
-					href: `/wiki/`,
-					title: 'База знаний',
-				},
+		...(isManagerOrDirector(currentUser)
+			? [{ icon: <ClientsIcon />, href: '/clients', title: 'Клиенты' }]
+			: []),
+		{
+			icon: <WikiIcon />,
+			href: `/wiki/`,
+			title: 'База знаний',
+		},
 		// {
 		// 	icon: 'logout',
 		// 	href: '',

@@ -5,6 +5,7 @@
 
 ## Скриншоты
 
+![alt text](./imgs/13.png)
 ![alt text](./imgs/1.png)
 ![alt text](./imgs/2.png)
 ![alt text](./imgs/3.png)

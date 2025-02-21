@@ -71,7 +71,9 @@
 		}
 
 		@media (any-hover: hover) {
-			&:hover {
+
+			&:hover,
+			&.active {
 				color: var(--accent-color);
 
 				svg {
