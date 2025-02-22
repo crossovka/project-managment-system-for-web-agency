@@ -21,7 +21,7 @@
 - **Email**: [cevyacheslav@gmail.com](mailto:cevyacheslav@gmail.com) (обновите на свой реальный email)
 
 ## Скриншоты
-
+![alt text](./imgs/Untitled.png)
 ![alt text](./imgs/13.png)
 ![alt text](./imgs/1.png)
 ![alt text](./imgs/2.png)
