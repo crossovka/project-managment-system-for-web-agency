@@ -11,6 +11,15 @@
 - Функционал с бонусами за сайты для сотрудников
 - Прикрепление скриншотов переводов из банка при оплате за проект и сотруднику
 
+## Контакты
+
+Если у вас возникли вопросы или предложения по проекту, вы можете связаться со мной или оставить issue на GitHub:
+
+- **Telegram**: @comunay
+- **Telephone**: +89963846503
+- **GitHub**: [https://github.com/crossovka](https://github.com/crossovka)
+- **Email**: [cevyacheslav@gmail.com](mailto:cevyacheslav@gmail.com) (обновите на свой реальный email)
+
 ## Скриншоты
 
 ![alt text](./imgs/13.png)
@@ -26,3 +35,4 @@
 ![alt text](./imgs/10.png)
 ![alt text](./imgs/11.png)
 ![alt text](./imgs/12.png)
+
