@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { AppDispatch, RootState } from '@/redux/store';
 import { apiClient } from '@/libs/utils/apiClient';
 import { ICategory } from './types';
+import toast from 'react-hot-toast';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 
 // Получение всех категорий
 export const fetchCategories = createAsyncThunk<
@@ -15,13 +16,11 @@ export const fetchCategories = createAsyncThunk<
 		const client = apiClient(dispatch, getState);
 		try {
 			const { data } = await client.get('categories');
-			console.log(`categories ${data}`)
+			console.log(`categories ${data}`);
 			return data;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки категорий';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки категорий');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -40,10 +39,8 @@ export const createCategory = createAsyncThunk<
 			dispatch(fetchCategories());
 			return data.category;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка создания категории';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка создания категории');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -64,10 +61,8 @@ export const updateCategory = createAsyncThunk<
 			const { data } = await client.put(`categories/${id}`, categoryData);
 			return data.category;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка обновления категории';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка обновления категории');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -85,10 +80,8 @@ export const deleteCategory = createAsyncThunk<
 			await client.delete(`categories/${id}`);
 			return id;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка удаления категории';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка удаления категории');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );

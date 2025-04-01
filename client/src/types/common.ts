@@ -45,3 +45,4 @@ export enum IProjectStatus {
 	ON_HOLD = 'Приостановлен',
 	CANCELED = 'Отменён',
 }
+

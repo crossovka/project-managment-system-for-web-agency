@@ -1,6 +1,7 @@
 import styles from './Form.module.scss';
 
 export interface BaseFormProps {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onSubmit: (data: any) => void;
 	onClose: () => void;
 	children: React.ReactNode;
@@ -8,7 +9,7 @@ export interface BaseFormProps {
 
 export const BaseForm: React.FC<BaseFormProps> = ({
 	onSubmit,
-	onClose,
+	// onClose,
 	children,
 }) => {
 	const handleSubmit = (e: React.FormEvent) => {

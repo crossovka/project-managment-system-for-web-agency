@@ -55,8 +55,8 @@ const AccessDetailsForm: React.FC<AccessDetailsFormProps> = ({
 				toast.success('Access created successfully');
 			}
 			onClose();
-		} catch (error) {
-			toast.error('Failed to save access details');
+		} catch {
+			toast.error('Ошибка сохраниения доступа');
 		}
 	};
 

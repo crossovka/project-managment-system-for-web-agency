@@ -1,5 +1,5 @@
+import { useRef } from 'react';
 import { useDrop } from 'react-dnd';
-
 import Column from './column';
 
 import { ITask } from '@/redux/slices/tasks/types';
@@ -10,6 +10,8 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ columns }) => {
+	const boardRef = useRef<HTMLDivElement>(null);
+
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'TASK',
 		drop: () => ({ name: 'Board' }),
@@ -18,8 +20,14 @@ const Board: React.FC<BoardProps> = ({ columns }) => {
 		}),
 	}));
 
+	// Привязываем drop к boardRef
+	drop(boardRef);
+
 	return (
-		<div ref={drop} className={styles.board}>
+		<div
+			ref={boardRef}
+			className={`${styles.board} ${isOver ? styles.highlight : ''}`}
+		>
 			{columns.map((column, index) => (
 				<Column key={index} title={column.title} tasks={column.tasks} />
 			))}

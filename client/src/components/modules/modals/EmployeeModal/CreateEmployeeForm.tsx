@@ -71,8 +71,7 @@ const CreateEmployeeForm: React.FC<CreateEmployeeFormProps> = ({ onClose }) => {
 			await dispatch(createEmployee(formState)).unwrap();
 			toast.success('Сотрудник успешно создан');
 			onClose();
-		} catch (error: any) {
-			console.error(error);
+		} catch {
 			toast.error('ошибка при создании сотрудника');
 		}
 	};

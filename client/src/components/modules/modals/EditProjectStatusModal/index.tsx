@@ -35,7 +35,7 @@ const EditProjectStatusModal: React.FC<EditProjectStatusModalProps> = ({
 			await dispatch(updateProjectStatus({ projectId, status }));
 			toast.success('Статус проекта успешно обновлен!');
 			onClose();
-		} catch (error) {
+		} catch {
 			toast.error('Ошибка при обновлении статуса');
 		}
 	};

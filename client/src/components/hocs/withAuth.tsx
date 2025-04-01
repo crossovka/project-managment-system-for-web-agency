@@ -1,12 +1,10 @@
-'use client';
-
-import { useEffect } from 'react';
+import { useEffect, ComponentType } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppSelector } from '@/redux/store';
 import { selectToken } from '@/redux/slices/auth/selectors';
 
-const withAuth = (Component: React.ComponentType) => {
-	const AuthenticatedComponent = (props: any) => {
+const withAuth = <P extends object>(Component: ComponentType<P>) => {
+	const AuthenticatedComponent = (props: P) => {
 		const token = useAppSelector(selectToken);
 		const router = useRouter();
 
@@ -14,7 +12,7 @@ const withAuth = (Component: React.ComponentType) => {
 			if (!token) {
 				router.push('/login'); // Redirect to login page
 			}
-		}, [token]);
+		}, [token, router]);
 
 		return token ? <Component {...props} /> : null;
 	};

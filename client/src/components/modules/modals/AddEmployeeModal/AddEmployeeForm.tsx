@@ -51,8 +51,8 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onClose, projectId })
 			);
 			toast.success('Employee added successfully.');
 			onClose();
-		} catch (error) {
-			toast.error('Failed to add employee.');
+		} catch {
+			toast.error('Ошибка добавления сотрудника.');
 		}
 	};
 

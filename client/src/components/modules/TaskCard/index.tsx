@@ -27,25 +27,26 @@ interface TaskCardProps {
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 	const dispatch = useAppDispatch();
 	const currentUser = useAppSelector(selectCurrentUser);
-	console.log(currentUser)
+	console.log(currentUser);
 	const ref = useRef<HTMLDivElement>(null);
 
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
 
-  const handleOpenModal = (task_id: number ) => {
+	const handleOpenModal = (task_id: number) => {
 		setSelectedTaskId(task_id);
 		setIsModalOpen(true);
-};
-const handleCloseModal = () => {
-	setIsModalOpen(false);
-	setSelectedTaskId(null);
-	dispatch(resetTask());
-};
+	};
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+		setSelectedTaskId(null);
+		dispatch(resetTask());
+	};
 
-
-	const isCreator = currentUser.employee.employee_id === task.createdBy.employee_id;
-	const isAssigned = currentUser.employee.employee_id === task.assignedTo.employee_id;
+	const isCreator =
+		currentUser.employee.employee_id === task.createdBy.employee_id;
+	const isAssigned =
+		currentUser.employee.employee_id === task.assignedTo.employee_id;
 	const isDirector = currentUser.employee.position === Position.DIRECTOR;
 	const isProjectManager = isProjectManagerOf(currentUser, task.project);
 
@@ -61,11 +62,14 @@ const handleCloseModal = () => {
 	// Назначенный сотрудник (isAssigned).
 	// Директор (isDirector).
 	// Менеджер проекта (isProjectManager).
+	// Условие для отображения кнопки "Редактировать задачу"
 	const canEdit =
-		task.status === ITaskStatus.UNDER_REVIEW
-			? isDirector ||
-			  (isProjectManager && task.status !== ITaskStatus.COMPLETED)
-			: isCreator || isAssigned || isDirector || isProjectManager;
+  task.status !== ITaskStatus.COMPLETED && // Prevent editing if task is COMPLETED
+  (
+    task.status === ITaskStatus.UNDER_REVIEW
+      ? isDirector || isProjectManager // Can edit if status is UNDER_REVIEW for Director/Project Manager
+      : isCreator || isAssigned || isDirector || isProjectManager // Otherwise, allow for Creator/Assigned/Director/Project Manager
+  );
 
 	const handleEditClick = (task: ITask) => (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -109,13 +113,16 @@ const handleCloseModal = () => {
 			</div>
 
 			<button
-					className={styles.viewButton}
-					onClick={() => handleOpenModal(task.task_id)}
+				className={styles.viewButton}
+				onClick={() => handleOpenModal(task.task_id)}
 			>
-					<ViewIcon />
+				<ViewIcon />
 			</button>
 			<div className={styles.footer}>
-				<span><HammerIcon/>{task.createdBy.name}</span>
+				<span>
+					<HammerIcon />
+					{task.createdBy.name}
+				</span>
 				<span>{task.assignedTo.name}</span>
 			</div>
 			{canEdit && (
@@ -127,11 +134,11 @@ const handleCloseModal = () => {
 					Редактировать задачу
 				</a>
 			)}
-						<ViewTaskModal
-                taskId={selectedTaskId}
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-            />
+			<ViewTaskModal
+				taskId={selectedTaskId}
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+			/>
 		</div>
 	);
 };

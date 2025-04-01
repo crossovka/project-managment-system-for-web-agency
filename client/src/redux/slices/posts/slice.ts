@@ -29,16 +29,16 @@ const handleRejected = (
 	state.error = action.payload || 'Ошибка выполнения операции';
 };
 
-const handleSingleFulfilled = (
-	state: PostState,
-	action: PayloadAction<IPost>
-) => {
-	state.loading = false;
-	state.error = null;
-	if (action.payload) {
-		state.currentPost = action.payload;
-	}
-};
+// const handleSingleFulfilled = (
+// 	state: PostState,
+// 	action: PayloadAction<IPost>
+// ) => {
+// 	state.loading = false;
+// 	state.error = null;
+// 	if (action.payload) {
+// 		state.currentPost = action.payload;
+// 	}
+// };
 
 const handleDeleteFulfilled = (
 	state: PostState,

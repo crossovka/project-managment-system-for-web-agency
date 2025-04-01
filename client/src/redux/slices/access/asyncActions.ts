@@ -1,10 +1,10 @@
 // asyncActions.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
-import { AxiosError } from 'axios';
 import { AppDispatch, RootState } from '@/redux/store';
 import { apiClient } from '@/libs/utils/apiClient';
 import { IAccess } from './types';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 
 // Fetch accesses by project ID
 // export const fetchAccessesByProjectId = createAsyncThunk<
@@ -50,37 +50,28 @@ export const createAccess = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка создания доступа');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка создания доступа'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
 
 // Update an existing access
 export const updateAccess = createAsyncThunk<
-	IAccess, // Тип возвращаемого объекта (обновленные данные доступа)
-	{ accessId: number; updates: IAccess }, // Тип данных, передаваемых в экшен (accessId и обновления)
+	IAccess,
+	{ accessId: number; updates: IAccess },
 	{ dispatch: AppDispatch; state: RootState }
 >(
-	'access/update', // Название экшена
+	'access/update',
 	async ({ accessId, updates }, { rejectWithValue, dispatch, getState }) => {
 		const client = apiClient(dispatch, getState);
 
 		try {
-			// Отправляем PATCH запрос с accessId в URL и обновлениями в теле запроса
 			const { data } = await client.patch(`/access/${accessId}`, updates);
-
 			toast.success('Доступ успешно обновлен');
-			return data; // Возвращаем обновленные данные доступа
+			return data;
 		} catch (error) {
 			toast.error('Ошибка обновления доступа');
-			// Возвращаем ошибку с сообщением, если запрос не удался
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления доступа'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -101,10 +92,7 @@ export const deleteAccess = createAsyncThunk<
 			return accessId;
 		} catch (error) {
 			toast.error('Ошибка удаления доступа');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка удаления доступа'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );

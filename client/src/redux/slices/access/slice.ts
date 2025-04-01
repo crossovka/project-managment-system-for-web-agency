@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AccessState, IAccess } from './types';
 import {
-	fetchAccessesByProjectId,
+	// fetchAccessesByProjectId,
 	createAccess,
 	updateAccess,
 	deleteAccess,

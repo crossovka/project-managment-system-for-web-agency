@@ -36,8 +36,8 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = ({
 			await dispatch(createContactDetails(formData)).unwrap();
 			toast.success('Contact details created successfully');
 			onClose();
-		} catch (error) {
-			toast.error('Failed to create contact details');
+		} catch {
+			toast.error('Ошибка при создании контактной информации');
 		}
 	};
 

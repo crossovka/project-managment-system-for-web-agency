@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 
 import { AppDispatch, RootState } from '@/redux/store';
@@ -7,6 +6,7 @@ import { AppDispatch, RootState } from '@/redux/store';
 import { IProject, IProjectMinimal } from './types';
 import { apiClient } from '@/libs/utils/apiClient';
 import { IProjectStatus } from '@/types/common';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 
 export const fetchProjectById = createAsyncThunk<
 	IProject,
@@ -20,11 +20,8 @@ export const fetchProjectById = createAsyncThunk<
 		// console.log(data)
 		return data;
 	} catch (error) {
-		toast.error('Ошибка загрузки проекта:', error);
-		return rejectWithValue(
-			(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки проекта'
-		);
+		toast.error('Ошибка загрузки проекта');
+		return rejectWithValue(getErrorMessage(error));
 	}
 });
 
@@ -42,10 +39,7 @@ export const fetchProjectNameById = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка загрузки имени проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка загрузки имени проекта'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -65,11 +59,8 @@ export const fetchEmployeeProjects = createAsyncThunk<
 			console.log(`fetchEmployeeProjects ${data}`);
 			return data; // Возвращаем список проектов сотрудника
 		} catch (error) {
-			toast.error('Ошибка загрузки проектов для сотрудника:', error);
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка загрузки проектов для сотрудника'
-			);
+			toast.error('Ошибка загрузки проектов для сотрудника');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -85,10 +76,8 @@ export const fetchProjects = createAsyncThunk<
 		const { data } = await client.get('/projects');
 		return data;
 	} catch (error) {
-		return rejectWithValue(
-			(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки проектов'
-		);
+		toast.error('Ошибка получения проектов');
+		return rejectWithValue(getErrorMessage(error));
 	}
 });
 
@@ -106,10 +95,7 @@ export const createProject = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка создания проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка создания проекта'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -130,11 +116,8 @@ export const addEmployeeToProject = createAsyncThunk<
 			await client.patch(`projects/${projectId}/employees`, { employeeId });
 			dispatch(fetchProjectById(projectId));
 		} catch (error) {
-			toast.error('Ошибка добавления сотрудника в проект');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Не удалось добавить сотрудника'
-			);
+			toast.error('Ошибка добавления сотрудника на проект');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -153,10 +136,7 @@ export const updateProjectManager = createAsyncThunk<
 			dispatch(fetchProjectById(projectId)); // Обновляем проект
 		} catch (error) {
 			toast.error('Ошибка смены менеджера проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Не удалось сменить менеджера'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -178,11 +158,8 @@ export const addPaymentToProject = createAsyncThunk<
 			dispatch(fetchProjectById(projectId)); // Обновляем проект
 			return data;
 		} catch (error) {
-			toast.error('Ошибка внесения оплаты:', error);
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Failed to add payment'
-			);
+			toast.error('Ошибка внесения оплаты');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -212,10 +189,7 @@ export const updateProjectDescription = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка обновления описания проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления описания проекта'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -245,10 +219,7 @@ export const updateProjectImportantInfo = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка обновления важной информации проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления важной информации проекта'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -272,10 +243,7 @@ export const updateProjectStatus = createAsyncThunk<
 			return data;
 		} catch (error) {
 			toast.error('Ошибка обновления статуса проекта');
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления статуса проекта'
-			);
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );

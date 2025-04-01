@@ -38,16 +38,16 @@ const handleRejected = (
 	state.error = action.payload || 'Ошибка выполнения операции';
 };
 
-const handleSingleFulfilled = (
-	state: CategoryState,
-	action: PayloadAction<ICategory>
-) => {
-	state.loading = false;
-	state.error = null;
-	if (action.payload) {
-		state.currentCategory = action.payload;
-	}
-};
+// const handleSingleFulfilled = (
+// 	state: CategoryState,
+// 	action: PayloadAction<ICategory>
+// ) => {
+// 	state.loading = false;
+// 	state.error = null;
+// 	if (action.payload) {
+// 		state.currentCategory = action.payload;
+// 	}
+// };
 
 const handleDeleteFulfilled = (
 	state: CategoryState,

@@ -1,7 +1,7 @@
 'use client';
 
 // import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { login } from '@/redux/slices/auth/asyncActions';
 import {

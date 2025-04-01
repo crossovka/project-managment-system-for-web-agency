@@ -22,36 +22,41 @@ const EditImportantInfoModal: React.FC<EditImportantInfoModalProps> = ({
 	currentImportantInfo,
 }) => {
 	const dispatch = useAppDispatch();
-	const [importantInfo, setImportantInfo] = useState<string>(currentImportantInfo);
+	const [importantInfo, setImportantInfo] =
+		useState<string>(currentImportantInfo);
 
 	const handleSubmit = async () => {
 		if (!importantInfo) {
-				toast.error('Важная информация не может быть пустой');
-				return;
+			toast.error('Важная информация не может быть пустой');
+			return;
 		}
 		try {
-				await dispatch(updateProjectImportantInfo({ projectId, importantInfo }));
-				toast.success('Важная информация успешно обновлена!');
-				onClose();
-		} catch (error) {
-				toast.error('Ошибка при обновлении важной информации');
+			await dispatch(updateProjectImportantInfo({ projectId, importantInfo }));
+			toast.success('Важная информация успешно обновлена!');
+			onClose();
+		} catch {
+			toast.error('Ошибка при обновлении важной информации');
 		}
-};
+	};
 
 	return (
-			<BaseModal isOpen={isOpen} onClose={onClose} title="Редактировать важную информацию">
-					<BaseForm onSubmit={handleSubmit} onClose={onClose}>
-							<FormField
-									label="Важная информация"
-									name="importantInfo"
-									type="textarea"
-									placeholder="Введите важную информацию"
-									value={importantInfo}
-									onChange={(e) => setImportantInfo(e.target.value)}
-									required
-							/>
-					</BaseForm>
-			</BaseModal>
+		<BaseModal
+			isOpen={isOpen}
+			onClose={onClose}
+			title="Редактировать важную информацию"
+		>
+			<BaseForm onSubmit={handleSubmit} onClose={onClose}>
+				<FormField
+					label="Важная информация"
+					name="importantInfo"
+					type="textarea"
+					placeholder="Введите важную информацию"
+					value={importantInfo}
+					onChange={(e) => setImportantInfo(e.target.value)}
+					required
+				/>
+			</BaseForm>
+		</BaseModal>
 	);
 };
 

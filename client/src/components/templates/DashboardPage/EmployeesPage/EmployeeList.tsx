@@ -1,5 +1,3 @@
-import toast from 'react-hot-toast';
-
 import { groupEmployeesByDepartment } from '@/libs/utils/employeeHelpers';
 
 import DepartmentSection from './DepartmentSection';

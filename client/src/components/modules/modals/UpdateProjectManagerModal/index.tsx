@@ -42,12 +42,11 @@ const UpdateProjectManagerModal: React.FC<UpdateProjectManagerModalProps> = ({
 			);
 			toast.success('Project manager updated successfully.');
 			onClose();
-		} catch (error) {
-			toast.error('Failed to update project manager.');
+		} catch {
+			toast.error('Ошибка обнволения проектного менеджера.');
 		}
 	};
 
-	
 	return (
 		<BaseModal
 			isOpen={isOpen}
@@ -60,7 +59,7 @@ const UpdateProjectManagerModal: React.FC<UpdateProjectManagerModalProps> = ({
 					selectedEmployeeId={selectedManagerId}
 					onChange={handleManagerChange}
 					mode={'managers'}
-					title={"Выбирете нового проектного менеджера"}
+					title={'Выбирете нового проектного менеджера'}
 				/>
 			</BaseForm>
 		</BaseModal>

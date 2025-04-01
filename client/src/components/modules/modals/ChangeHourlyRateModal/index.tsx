@@ -34,7 +34,7 @@ const ChangeHourlyRateModal: React.FC<ChangeHourlyRateModalProps> = ({
 			);
 			toast.success('Почасовая ставка успешно обновлена');
 			onClose();
-		} catch (error) {
+		} catch {
 			toast.error('Ошибка при изменении почасовой ставки');
 		}
 	};

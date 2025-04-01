@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 import { AppDispatch, RootState } from '@/redux/store';
 import { apiClient } from '@/libs/utils/apiClient';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 import { IEmployee } from '../auth/types';
-import { fetchEmployeeProfile, fetchProfile } from '../auth/asyncActions';
+import { fetchEmployeeProfile } from '../auth/asyncActions';
 
 // В fetchEmployees вы уже передаете dispatch и getState
 export const fetchEmployees = createAsyncThunk<
@@ -23,11 +24,8 @@ export const fetchEmployees = createAsyncThunk<
 			console.log(data);
 			return data.employees; // Возвращаем данные, чтобы сохранить их в state
 		} catch (error) {
-			// Если произошла ошибка, возвращаем сообщение об ошибке
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки сотрудников';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки сотрудников');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -44,7 +42,8 @@ export const createEmployee = createAsyncThunk<
 			const { data } = await client.post('employees', newEmployee);
 			return data.employee;
 		} catch (error) {
-			return rejectWithValue('Ошибка при создании сотрудника');
+			toast.error('Ошибка при создании сотрудника');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -64,10 +63,8 @@ export const fetchEmployeeName = createAsyncThunk<
 			);
 			return data.name; // Возвращаем имя сотрудника
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки имени сотрудника';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки имени сотрудника');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -95,11 +92,8 @@ export const payEmployee = createAsyncThunk<
 			dispatch(fetchEmployeeProfile(employeeId));
 			return data;
 		} catch (error) {
-			// Извлечение сообщения об ошибке
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Произошла ошибка при выплате сотруднику';
-			return rejectWithValue(errorMessage); // Возврат ошибки через rejectWithValue
+			toast.error('Произошла ошибка при выплате сотруднику');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -117,10 +111,8 @@ export const fetchProjectManagers = createAsyncThunk<
 			const { data } = await client.get('employees/managers');
 			return data.employees;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки проектных менеджеров';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки проектных менеджеров');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -139,10 +131,8 @@ export const fetchProjectEmployees = createAsyncThunk<
 			console.log(data);
 			return data.employees;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки сотрудников проекта';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки сотрудников проекта');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -167,30 +157,28 @@ export const updateHourlyRate = createAsyncThunk<
 			dispatch(fetchEmployeeProfile(employeeId));
 			return data;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка при изменении почасовой ставки';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка при изменении почасовой ставки');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
 
 // Экшен для получения почасовой ставки
 export const fetchHourlyRate = createAsyncThunk<
-    number, // Тип данных, которые мы получим в результате
-    number, // Тип параметров
-    { dispatch: AppDispatch; state: RootState } // Типы для dispatch и state
+	number, // Тип данных, которые мы получим в результате
+	number, // Тип параметров
+	{ dispatch: AppDispatch; state: RootState } // Типы для dispatch и state
 >(
-    'employee/fetchHourlyRate',
-    async (employeeId, { rejectWithValue, dispatch, getState }) => {
-        const client = apiClient(dispatch, getState); // Инициализация клиента для запроса
+	'employee/fetchHourlyRate',
+	async (employeeId, { rejectWithValue, dispatch, getState }) => {
+		const client = apiClient(dispatch, getState); // Инициализация клиента для запроса
 
-        try {
-            const { data } = await client.get(`employees/${employeeId}/hourly-rate`);
-            return data.hourlyRate;
-        } catch (error) {
-            const errorMessage = (error as AxiosError)?.response?.data?.message || 'Ошибка при получении почасовой ставки';
-            return rejectWithValue(errorMessage);
-        }
-    }
+		try {
+			const { data } = await client.get(`employees/${employeeId}/hourly-rate`);
+			return data.hourlyRate;
+		} catch (error) {
+			toast.error('Ошибка при получении почасовой ставки');
+			return rejectWithValue(getErrorMessage(error));
+		}
+	}
 );

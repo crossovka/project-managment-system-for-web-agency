@@ -10,14 +10,14 @@ import { FormField } from '@/components/elements/Form/FormField';
 interface PaymentProjectFormProps {
 	onClose: () => void;
 	projectId: number;
-	totalTurnover: number;
+	// totalTurnover: number;
 	accountsReceivable: number;
 }
 
 const PaymentProjectForm: React.FC<PaymentProjectFormProps> = ({
 	onClose,
 	projectId,
-	totalTurnover,
+	// totalTurnover,
 	accountsReceivable,
 }) => {
 	const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ const PaymentProjectForm: React.FC<PaymentProjectFormProps> = ({
 		try {
 			await dispatch(addPaymentToProject({ projectId, amount: paymentAmount }));
 			toast.success('Выплата по проекту успешно произведена!');
-		} catch (error) {
+		} catch {
 			toast.error('Ошибка при выплате по проекту!');
 		} finally {
 			onClose();

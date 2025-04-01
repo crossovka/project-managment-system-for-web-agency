@@ -1,12 +1,15 @@
 import axios, { AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
-import { AppDispatch, RootState } from '@/redux/store';
+import { AppDispatch } from '@/redux/store';
 import { logout } from '@/redux/slices/auth/slice';
 // TODO проверка на то просрочен литокен
 /**
  * Axios-инстанс с проверкой токена и автоматической авторизацией.
  */
-export const apiClient = (dispatch: AppDispatch, getState: () => RootState) => {
+export const apiClient = (
+	dispatch: AppDispatch
+	//  getState: () => RootState
+) => {
 	const instance = axios.create({
 		baseURL: process.env.NEXT_PUBLIC_API_URL,
 		withCredentials: true,

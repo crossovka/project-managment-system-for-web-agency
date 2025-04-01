@@ -1,8 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
-
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import { selectCurrentUser } from '@/redux/slices/auth/selectors';
 import { logout } from '@/redux/slices/auth/slice';

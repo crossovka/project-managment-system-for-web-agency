@@ -4,8 +4,11 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/redux/store';
-import { selectAuthState, selectEmployeeProfile } from '@/redux/slices/auth/selectors';
-import { fetchCurrentUserProfile, fetchEmployeeProfile } from '@/redux/slices/auth/asyncActions';
+import { selectEmployeeProfile } from '@/redux/slices/auth/selectors';
+import {
+	fetchCurrentUserProfile,
+	fetchEmployeeProfile,
+} from '@/redux/slices/auth/asyncActions';
 // import { logout } from '@/redux/slices/auth/slice';
 
 import { selectCurrentUser } from '@/redux/slices/auth/selectors';
@@ -34,7 +37,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ viewEmployeeId }) => {
 	const dispatch = useAppDispatch();
 	const currentUser = useAppSelector(selectCurrentUser);
 	const employeeProfile = useAppSelector(selectEmployeeProfile);
-	const { profileLoading } = useAppSelector(selectAuthState);
+	// const { profileLoading } = useAppSelector(selectAuthState);
 
 	// Локальное состояние для активного статуса
 	const [activeStatus, setActiveStatus] = useState<string>('Все');
@@ -53,27 +56,28 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ viewEmployeeId }) => {
 
 	useEffect(() => {
 		if (!viewEmployeeId) {
-				dispatch(fetchCurrentUserProfile());
+			dispatch(fetchCurrentUserProfile());
 		} else {
-				dispatch(fetchEmployeeProfile(viewEmployeeId));
+			dispatch(fetchEmployeeProfile(viewEmployeeId));
 		}
-}, [dispatch, viewEmployeeId])
+	}, [dispatch, viewEmployeeId]);
 
-		// if (profileLoading) {
-		// 	return <LoadingSpinner />;
-		// }
+	// if (profileLoading) {
+	// 	return <LoadingSpinner />;
+	// }
 
-		// Определяем, чей профиль отображается
-		const profile = viewEmployeeId ? employeeProfile : currentUser;
+	// Определяем, чей профиль отображается
+	const profile = viewEmployeeId ? employeeProfile : currentUser;
 
-		if (!profile) {
-			return <LoadingSpinner />;
-		}
+	if (!profile) {
+		return <LoadingSpinner />;
+	}
 
 	// Деструктуризация данных сотрудника и статистики
-	const { employee_id, name, position, department, hourlyRate } = profile.employee || {};
+	const { employee_id, name, position, department, hourlyRate } =
+		profile.employee || {};
 	const { totalEarnings, pendingEarnings, monthlyEarnings, hoursWorked } =
-	profile.employeeStatistic || {};
+		profile.employeeStatistic || {};
 
 	const employeeInItem = { name, position, department };
 
@@ -97,100 +101,102 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ viewEmployeeId }) => {
 
 	return (
 		<div className={styles.profile}>
-				<div className={styles.profile__info}>
-					{/* <h2>{name || 'Неизвестно'}</h2>
+			<div className={styles.profile__info}>
+				{/* <h2>{name || 'Неизвестно'}</h2>
 					<p>Должность: {position || 'Не указано'}</p>
 					<p>Отдел: {department || 'Не указан'}</p> */}
-					<EmployeeItem
-						// key={employee.employee_id}
-						employee={employeeInItem}
-					/>
-				</div>
-				<ul className={styles.profile__earnings}>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{formatCurrency(totalEarnings || 0)} ₽</span>
-							<p>Всего заработано:</p>
-						</div>
-						<CoinIcon />
-					</li>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{formatCurrency(pendingEarnings || 0)} ₽</span>
-							<p>К получению:</p>
-						</div>
-						<WalletIcon />
-					</li>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{formatCurrency(monthlyEarnings || 0)} ₽</span>
-							<p>Получено за месяц:</p>
-						</div>
-						<MonthIcon />
-					</li>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{hoursWorked || 0} часов</span>
-							<p>Отработано:</p>
-						</div>
-						<HoursIcon />
-					</li>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{formatCurrency(0)} ₽</span>
-							<p>Получено бонусов:</p>
-						</div>
-						<BonusIcon />
-					</li>
-					<li>
-						<div className={styles.earnings__inner}>
-							<span>{formatCurrency(0)} ₽</span>
-							<p>Бонусы к получению:</p>
-						</div>
-						<BonusIcon />
-					</li>
-				</ul>
-
-				{/* Отображение проектов с использованием Tabs */}
-				{projects && projects.length > 0 ? (
-					<div className={styles.profile__projects}>
-						<h3>Проекты:</h3>
-
-						{/* Компонент Tabs для фильтрации */}
-						<Tabs
-							tabs={projectStatuses}
-							activeTab={activeStatus}
-							onTabChange={setActiveStatus}
-						/>
-
-						{/* Список проектов, отфильтрованный по активному статусу */}
-						<ul className={styles.projectsList}>
-							{filteredProjects.map((project) => (
-								<li key={project.project_id} className={styles.projectCard}>
-									<Link href={`/dashboard/projects/${project.project_id}`}>
-										<h4>{project.name}</h4>
-										{/* <p>{project.status}</p> */}
-									</Link>
-								</li>
-							))}
-						</ul>
+				<EmployeeItem
+					// key={employee.employee_id}
+					employee={employeeInItem}
+				/>
+			</div>
+			<ul className={styles.profile__earnings}>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{formatCurrency(totalEarnings || 0)} ₽</span>
+						<p>Всего заработано:</p>
 					</div>
-				) : (
-					<p>Сотрудник не назначен на проекты</p>
-				)}
+					<CoinIcon />
+				</li>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{formatCurrency(pendingEarnings || 0)} ₽</span>
+						<p>К получению:</p>
+					</div>
+					<WalletIcon />
+				</li>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{formatCurrency(monthlyEarnings || 0)} ₽</span>
+						<p>Получено за месяц:</p>
+					</div>
+					<MonthIcon />
+				</li>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{hoursWorked || 0} часов</span>
+						<p>Отработано:</p>
+					</div>
+					<HoursIcon />
+				</li>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{formatCurrency(0)} ₽</span>
+						<p>Получено бонусов:</p>
+					</div>
+					<BonusIcon />
+				</li>
+				<li>
+					<div className={styles.earnings__inner}>
+						<span>{formatCurrency(0)} ₽</span>
+						<p>Бонусы к получению:</p>
+					</div>
+					<BonusIcon />
+				</li>
+			</ul>
+
+			{/* Отображение проектов с использованием Tabs */}
+			{projects && projects.length > 0 ? (
+				<div className={styles.profile__projects}>
+					<h3>Проекты:</h3>
+
+					{/* Компонент Tabs для фильтрации */}
+					<Tabs
+						tabs={projectStatuses}
+						activeTab={activeStatus}
+						onTabChange={setActiveStatus}
+					/>
+
+					{/* Список проектов, отфильтрованный по активному статусу */}
+					<ul className={styles.projectsList}>
+						{filteredProjects.map((project) => (
+							<li key={project.project_id} className={styles.projectCard}>
+								<Link href={`/dashboard/projects/${project.project_id}`}>
+									<h4>{project.name}</h4>
+									{/* <p>{project.status}</p> */}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			) : (
+				<p>Сотрудник не назначен на проекты</p>
+			)}
 
 			<div>Почасовая ставка: {hourlyRate}</div>
 			{/* <Link href={`/dashboard/tasks/employee/${employee_id}`}>Задачи</Link> */}
 			{/* <button onClick={() => dispatch(logout())}>Выйти</button> */}
 			{viewEmployeeId && (
 				<>
-					<button
-						onClick={() => setModalOpen(true)}
-						className={'btn'}
-					>
+					<button onClick={() => setModalOpen(true)} className={'btn'}>
 						Заплатить сотруднику
 					</button>
-					<button onClick={() => setChangeRateModalOpen(true)} className={'btn'}>Сменить почасовую ставку</button>
+					<button
+						onClick={() => setChangeRateModalOpen(true)}
+						className={'btn'}
+					>
+						Сменить почасовую ставку
+					</button>
 
 					<PaymentEmployeeModal
 						isOpen={isModalOpen}
@@ -200,11 +206,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ viewEmployeeId }) => {
 						employeeId={employee_id}
 					/>
 
-<ChangeHourlyRateModal
-                        isOpen={isChangeRateModalOpen}
-                        onClose={() => setChangeRateModalOpen(false)}
-                        employeeId={employee_id}
-                    />
+					<ChangeHourlyRateModal
+						isOpen={isChangeRateModalOpen}
+						onClose={() => setChangeRateModalOpen(false)}
+						employeeId={employee_id}
+					/>
 				</>
 			)}
 		</div>

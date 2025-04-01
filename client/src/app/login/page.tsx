@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import LoginForm from '@/app/login/LoginForm';
 
 import styles from './LoginPage.module.scss'

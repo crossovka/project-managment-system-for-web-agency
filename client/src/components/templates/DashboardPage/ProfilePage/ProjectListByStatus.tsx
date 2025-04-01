@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { IProjectStatus } from '@/types/common';
+import { IProject } from '@/redux/slices/project/types';
 
 interface ProjectListByStatusProps {
-	projects: any[]; // Пропс для списка проектов
+	projects: IProject[];
 }
 
 const ProjectListByStatus: React.FC<ProjectListByStatusProps> = ({

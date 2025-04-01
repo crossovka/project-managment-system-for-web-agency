@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 import { AppDispatch, RootState } from '@/redux/store';
 import { apiClient } from '@/libs/utils/apiClient';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 import { ITask, UpdateTaskPayload } from './types';
 
 export const fetchTasksByEmployeeId = createAsyncThunk<
@@ -18,10 +19,8 @@ export const fetchTasksByEmployeeId = createAsyncThunk<
 			const { data } = await client.get(`tasks/employee/${employeeId}`);
 			return data;
 		} catch (error) {
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка загрузки задач'
-			);
+			toast.error('Ошибка загрузки задач');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -39,10 +38,8 @@ export const fetchTasksByProjectId = createAsyncThunk<
 			const { data } = await client.get(`tasks/project/${projectId}`);
 			return data;
 		} catch (error) {
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка загрузки задач по проекту'
-			);
+			toast.error('Ошибка загрузки задач проекта');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -60,10 +57,8 @@ export const updateTaskStatus = createAsyncThunk<
 			const { data } = await client.patch(`tasks/${taskId}`, { status });
 			return data;
 		} catch (error) {
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления статуса задачи'
-			);
+			toast.error('Ошибка обновления статуса задачи');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -78,15 +73,11 @@ export const updateTask = createAsyncThunk<
 	async ({ taskId, updates }, { rejectWithValue, dispatch, getState }) => {
 		const client = apiClient(dispatch, getState);
 		try {
-			console.log(`1 ${data}`)
 			const { data } = await client.patch(`tasks/${taskId}`, updates);
-			console.log(`2 ${data}`)
 			return data;
 		} catch (error) {
-			return rejectWithValue(
-				(error as AxiosError)?.response?.data?.message ||
-					'Ошибка обновления задачи'
-			);
+			toast.error('Ошибка обновления задачи');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -130,26 +121,27 @@ export const createTask = createAsyncThunk<
 		console.log('Task created:', data);
 		return data;
 	} catch (error) {
-		const message =
-			(error as AxiosError)?.response?.data?.message ||
-			'Ошибка создания задачи';
-		return rejectWithValue(message);
+		toast.error('Ошибка создания задачи');
+		return rejectWithValue(getErrorMessage(error));
 	}
 });
 
-export const fetchTaskById = createAsyncThunk<ITask, number, { dispatch: AppDispatch; state: RootState }>(
+export const fetchTaskById = createAsyncThunk<
+	ITask,
+	number,
+	{ dispatch: AppDispatch; state: RootState }
+>(
 	'tasks/fetchById',
 	async (taskId, { rejectWithValue, dispatch, getState }) => {
-			const client = apiClient(dispatch, getState);
+		const client = apiClient(dispatch, getState);
 
-			try {
-					const { data } = await client.get(`tasks/${taskId}`);
-					console.log(data)
-					return data;
-			} catch (error) {
-					return rejectWithValue(
-							(error as AxiosError)?.response?.data?.message || 'Ошибка при загрузке задачи'
-					);
-			}
+		try {
+			const { data } = await client.get(`tasks/${taskId}`);
+			console.log(data);
+			return data;
+		} catch (error) {
+			toast.error('Ошибка при загрузке задачи');
+			return rejectWithValue(getErrorMessage(error));
+		}
 	}
 );

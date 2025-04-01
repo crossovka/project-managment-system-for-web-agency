@@ -38,8 +38,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose }) => {
 			await dispatch(createCategory(newCategory)).unwrap();
 			toast.success('Категория успешно создана');
 			onClose(); // Закрываем модалку
-		} catch (error: any) {
-			console.error(error);
+		} catch {
 			toast.error('Ошибка при создании категории');
 		}
 	};

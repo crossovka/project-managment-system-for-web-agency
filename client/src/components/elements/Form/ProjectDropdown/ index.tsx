@@ -7,7 +7,6 @@ import {
 	selectProjectError,
 } from '@/redux/slices/project/selectors';
 import { fetchEmployeeProjects } from '@/redux/slices/project/asyncActions';
-import { selectEmployee } from '@/redux/slices/auth/selectors';
 
 import styles from './ProjectDropdown.module.scss';
 

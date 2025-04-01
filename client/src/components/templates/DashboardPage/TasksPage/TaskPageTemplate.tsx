@@ -91,7 +91,7 @@ const TaskPageTemplate: React.FC<TaskPageTemplateProps> = ({ id, type }) => {
 
 			toast.success('Задача успешно обновлена');
 			dispatch(closeTaskModal());
-		} catch (error) {
+		} catch {
 			toast.error('Ошибка при обновлении задачи');
 		}
 	};
@@ -108,20 +108,20 @@ const TaskPageTemplate: React.FC<TaskPageTemplateProps> = ({ id, type }) => {
 			).unwrap();
 			toast.success('Задача успешно создана');
 			dispatch(closeTaskModal());
-		} catch (error) {
+		} catch {
 			toast.error('Ошибка при создании задачи');
 		}
 	};
 
-	const onSaveHandler = (updates: Partial<ITask>) => {
-		if (currentTask?.task_id) {
-			// Если задача существует и имеет task_id, обновляем задачу
-			handleTaskSave(updates);
-		} else {
-			// Если task_id нет, создаем новую задачу
-			handleCreateTask(updates);
-		}
-	};
+	// const onSaveHandler = (updates: Partial<ITask>) => {
+	// 	if (currentTask?.task_id) {
+	// 		// Если задача существует и имеет task_id, обновляем задачу
+	// 		handleTaskSave(updates);
+	// 	} else {
+	// 		// Если task_id нет, создаем новую задачу
+	// 		handleCreateTask(updates);
+	// 	}
+	// };
 
 	// Логика для creatorId и assigneeId
 	const assigneeId = type === 'assign-to-employee' ? Number(id) : undefined;

@@ -34,7 +34,7 @@ const EditDescriptionModal: React.FC<EditDescriptionModalProps> = ({
 				await dispatch(updateProjectDescription({ projectId, description }));
 				toast.success('Описание успешно обновлено!');
 				onClose();
-		} catch (error) {
+		} catch {
 				toast.error('Ошибка при обновлении описания');
 		}
 };

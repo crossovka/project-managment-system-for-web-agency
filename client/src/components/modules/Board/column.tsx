@@ -23,39 +23,39 @@ const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
 	const dispatch = useAppDispatch();
 	const currentUser = useAppSelector(selectCurrentUser);
 	const createdBy = currentUser?.employee?.employee_id;
-	// console.log("Created By:", createdBy);
 
-	const [{ isOver }, drop] = useDrop(() => ({
+	const dropRef = useDrop(() => ({
 		accept: 'TASK',
 		drop: async (item: { id: number; status: string }) => {
-			// 1. Запрет перемещения задач из COMPLETED
 			if (item.status === ITaskStatus.COMPLETED) {
-				toast.error('Cannot move tasks from COMPLETED');
+				toast.error('Нельзя перемещать задачи из ЗАВЕРШЕНО');
 				return;
 			}
 
-			// 2. Ограничение перемещения задач из UNDER_REVIEW только в COMPLETED
 			if (
 				item.status === ITaskStatus.UNDER_REVIEW &&
 				title !== ITaskStatus.COMPLETED
 			) {
-				toast.error('Задачи на ПРОВЕРКЕ могут быть перемещены только в ЗАВЕРШЕНО');
+				toast.error(
+					'Задачи на ПРОВЕРКЕ могут быть перемещены только в ЗАВЕРШЕНО'
+				);
 				return;
 			}
 
-			// 3. Подготовка данных для обновления задачи
 			const updatedTask = {
 				taskId: item.id,
 				status: title,
 			};
 
 			try {
-				// 4. Логика уведомлений
 				if (title === ITaskStatus.UNDER_REVIEW) {
-					toast('Задача переведена на ПРОВЕРКУ - менеджер рассмотрит ее в ближайшее время', {
-						icon: '🛠️',
-						duration: 4000,
-					});
+					toast(
+						'Задача переведена на ПРОВЕРКУ - менеджер рассмотрит ее в ближайшее время',
+						{
+							icon: '🛠️',
+							duration: 4000,
+						}
+					);
 				} else if (
 					title === ITaskStatus.COMPLETED &&
 					!isManagerOrDirector(currentUser)
@@ -68,19 +68,15 @@ const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
 					toast.success(`Задача перемещена в колонку "${title}"`);
 				}
 
-				// 5. Обновление статуса задачи через Redux
 				await dispatch(updateTaskStatus(updatedTask)).unwrap();
-			} catch (error) {
-				toast.error(error?.message || 'Ошибка при обновлении статуса задачи');
+			} catch {
+				toast.error('Ошибка при обновлении статуса задачи');
 			}
 		},
-		collect: (monitor) => ({
-			isOver: monitor.isOver(),
-		}),
-	}));
+	}))[1]; // Используем только `dropRef`, без `isOver`
 
 	return (
-		<div ref={drop} className={styles.column}>
+		<div ref={dropRef} className={styles.column}>
 			<h2>
 				{title}{' '}
 				{title !== ITaskStatus.COMPLETED && (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 
 import { BaseForm } from '@/components/elements/Form/BaseForm';
@@ -73,10 +73,11 @@ const TaskForm: React.FC<TaskFormProps> = ({
 		setSelectedProjectId(projectId);
 	};
 
-	const calculateCost = () => {
+	const calculateCost = useCallback(() => {
+		const rate = hourlyRate ?? 0; // Подставляем 0, если hourlyRate = null
 		const totalHours = Number(formData.hours) + Number(formData.minutes) / 60;
-		return (totalHours * hourlyRate).toFixed(2);
-	};
+		return (totalHours * rate).toFixed(2);
+	}, [formData.hours, formData.minutes, hourlyRate]);
 
 	useEffect(() => {
 		if (formData.workType === WorkType.HOURLY_BASED) {
@@ -85,7 +86,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
 				cost: calculateCost(),
 			}));
 		}
-	}, [formData.hours, formData.minutes, formData.workType]);
+	}, [calculateCost, formData.hours, formData.minutes, formData.workType]);
 
 	const handleDescriptionChange = (value: string) => {
 		setFormData((prev) => ({

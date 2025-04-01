@@ -8,7 +8,6 @@ import { BaseForm } from '@/components/elements/Form/BaseForm';
 import { FormField } from '@/components/elements/Form/FormField';
 import EmployeeDropdown from '@/components/elements/Form/EmployeeDropdown';
 import ClientsDropdown from '@/components/elements/Form/ClientsDropdown';
-import EditorField from '@/components/elements/Form/EditorField';
 
 import { IProject } from '@/redux/slices/project/types';
 import { IProjectStatus } from '@/types/common';
@@ -62,32 +61,31 @@ const CreateProjectForm: React.FC<CreateProjectFormProps> = ({ onClose }) => {
 		}));
 	};
 
-// 	const handleDescriptionChange = (value: string) => {
-// 		setFormData((prev) => ({
-// 				...prev,
-// 				description: value,
-// 		}));
-// };
+	// 	const handleDescriptionChange = (value: string) => {
+	// 		setFormData((prev) => ({
+	// 				...prev,
+	// 				description: value,
+	// 		}));
+	// };
 
-// const handleImportantInfoChange = (value: string) => {
-// 		setFormData((prev) => ({
-// 				...prev,
-// 				importantInfo: value,
-// 		}));
-// };
-
+	// const handleImportantInfoChange = (value: string) => {
+	// 		setFormData((prev) => ({
+	// 				...prev,
+	// 				importantInfo: value,
+	// 		}));
+	// };
 
 	// Обработчик для поля выбора сотрудников
-	const handleEmployeesChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const selectedOptions = Array.from(e.target.selectedOptions);
-		const selectedValues = selectedOptions.map((option) =>
-			Number(option.value)
-		);
-		setFormData((prev) => ({
-			...prev,
-			employees: selectedValues,
-		}));
-	};
+	// const handleEmployeesChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	// 	const selectedOptions = Array.from(e.target.selectedOptions);
+	// 	const selectedValues = selectedOptions.map((option) =>
+	// 		Number(option.value)
+	// 	);
+	// 	setFormData((prev) => ({
+	// 		...prev,
+	// 		employees: selectedValues,
+	// 	}));
+	// };
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -96,8 +94,8 @@ const CreateProjectForm: React.FC<CreateProjectFormProps> = ({ onClose }) => {
 			await dispatch(createProject(formData)).unwrap();
 			toast.success('Project created successfully');
 			onClose();
-		} catch (error) {
-			toast.error('Failed to create project');
+		} catch {
+			toast.error('Ошибка создания проекта');
 		}
 	};
 
@@ -125,23 +123,23 @@ const CreateProjectForm: React.FC<CreateProjectFormProps> = ({ onClose }) => {
 				placeholder={'Введите важную информацию...'}
 			/> */}
 
-				<FormField
-					label="Описание"
-					name="description"
-					type="textarea"
-					placeholder="Введите описание проекта"
-					value={formData.description}
-					onChange={handleInputChange}
-				/>
+			<FormField
+				label="Описание"
+				name="description"
+				type="textarea"
+				placeholder="Введите описание проекта"
+				value={formData.description}
+				onChange={handleInputChange}
+			/>
 
-				<FormField
-					label="Важная информация"
-					name="importantInfo"
-					type="textarea"
-					placeholder="Введите важную информацию"
-					value={formData.importantInfo}
-					onChange={handleInputChange}
-				/>
+			<FormField
+				label="Важная информация"
+				name="importantInfo"
+				type="textarea"
+				placeholder="Введите важную информацию"
+				value={formData.importantInfo}
+				onChange={handleInputChange}
+			/>
 
 			<FormField
 				label="Дата начала"

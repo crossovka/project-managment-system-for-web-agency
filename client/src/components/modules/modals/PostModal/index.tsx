@@ -82,18 +82,16 @@ const PostModal: React.FC<PostModalProps> = ({ isOpen, onClose, post }) => {
 
 		try {
 			if (isEditMode) {
-				// Режим редактирования
-				const resultAction = await dispatch(updatePost(newPost));
+				await dispatch(updatePost(newPost)); // Убрали resultAction
 				dispatch(fetchPostById(newPost.post_id));
 				toast.success('Статья успешно обновлена');
 			} else {
-				// Режим создания
-				const resultAction = await dispatch(createPost(newPost));
+				await dispatch(createPost(newPost)); // Убрали resultAction
 				toast.success('Статья успешно создана');
 			}
 
 			onClose();
-		} catch (error: any) {
+		} catch {
 			toast.error('Ошибка при сохранении статьи');
 		}
 	};

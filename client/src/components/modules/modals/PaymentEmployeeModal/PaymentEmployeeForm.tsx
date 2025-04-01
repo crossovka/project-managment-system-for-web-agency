@@ -10,15 +10,15 @@ import { payEmployee } from '@/redux/slices/employee/asyncActions';
 interface PaymentEmployeeFormProps {
 	onClose: () => void;
 	pendingEarnings: number;
-	totalEarnings: number;
+	// totalEarnings: number;
 	employeeId: number;
 }
 
 const PaymentEmployeeForm: React.FC<PaymentEmployeeFormProps> = ({
-	isOpen,
+	// isOpen,
 	onClose,
 	pendingEarnings,
-	totalEarnings,
+	// totalEarnings,
 	employeeId,
 }) => {
 	const dispatch = useAppDispatch();
@@ -27,19 +27,19 @@ const PaymentEmployeeForm: React.FC<PaymentEmployeeFormProps> = ({
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = parseFloat(e.target.value);
 		if (isNaN(value)) {
-				setPaymentAmount(0);
-				return;
+			setPaymentAmount(0);
+			return;
 		}
 		if (value < 0) {
-				toast.error('Значение не может быть отрицательным');
-				return;
+			toast.error('Значение не может быть отрицательным');
+			return;
 		}
 		if (value > pendingEarnings) {
-				toast.error('Сумма выплаты не может превышать сумму к получению');
-				return;
+			toast.error('Сумма выплаты не может превышать сумму к получению');
+			return;
 		}
 		setPaymentAmount(value);
-};
+	};
 
 	const handleSubmit = async () => {
 		if (paymentAmount > pendingEarnings) {
@@ -50,7 +50,7 @@ const PaymentEmployeeForm: React.FC<PaymentEmployeeFormProps> = ({
 			try {
 				await dispatch(payEmployee({ employeeId, amount: paymentAmount }));
 				toast.success('Выплата успешно произведена!');
-			} catch (error) {
+			} catch {
 				toast.error('Ошибка при выплате!');
 			} finally {
 				onClose();

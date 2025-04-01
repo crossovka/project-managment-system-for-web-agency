@@ -18,13 +18,13 @@ const CreateClientForm: React.FC<CreateClientFormProps> = ({ onClose }) => {
 		contactDetails: [{ contactPerson: '', contactInfo: '' }],
 	});
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = async () => {
 		try {
 			await dispatch(createClient(formData)).unwrap();
 			toast.success('Client created successfully');
 			onClose();
-		} catch (error) {
-			toast.error('Failed to create client');
+		} catch {
+			toast.error('Ошибка создания клиента');
 		}
 	};
 

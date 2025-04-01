@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 import { AppDispatch, RootState } from '@/redux/store';
 import { apiClient } from '@/libs/utils/apiClient';
+import { getErrorMessage } from '@/libs/utils/getErrorMessage';
 import { IPost } from './types';
 
 // Получение всех постов
@@ -16,10 +17,8 @@ export const fetchPosts = createAsyncThunk<
 		// console.log(`posts ${data}`);
 		return data;
 	} catch (error) {
-		const errorMessage =
-			(error as AxiosError)?.response?.data?.message ||
-			'Ошибка загрузки постов';
-		return rejectWithValue(errorMessage);
+		toast.error('Ошибка загрузки постов');
+		return rejectWithValue(getErrorMessage(error));
 	}
 });
 
@@ -37,10 +36,8 @@ export const fetchPostById = createAsyncThunk<
 			// console.log(data)
 			return data;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка загрузки поста';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка загрузки поста');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -59,10 +56,8 @@ export const createPost = createAsyncThunk<
 			dispatch(fetchPosts());
 			return data.post;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка создания поста';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка создания поста');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -82,11 +77,8 @@ export const updatePost = createAsyncThunk<
 			console.log('updatePost success:', data.post);
 			return data;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка обновления поста';
-			console.error('updatePost error:', errorMessage);
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка обновления поста');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
@@ -104,10 +96,8 @@ export const deletePost = createAsyncThunk<
 			await client.delete(`posts/${id}`);
 			return id;
 		} catch (error) {
-			const errorMessage =
-				(error as AxiosError)?.response?.data?.message ||
-				'Ошибка удаления поста';
-			return rejectWithValue(errorMessage);
+			toast.error('Ошибка удаления поста');
+			return rejectWithValue(getErrorMessage(error));
 		}
 	}
 );
